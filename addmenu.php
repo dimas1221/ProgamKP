@@ -35,7 +35,13 @@ if (isset($_POST['tambah_data'])) {
         }
         alertWindow("Menu berhasil di tambahkan ");
     } else {
-        echo "<b>Gagal Menambahkan data</b>";
+        function alertWindow($msg)
+        {
+            echo "<script type ='text/JavaScript'>";
+            echo "alert('$msg')";
+            echo "</script>";
+        }
+        alertWindow("Menu gagal di tambahkan karena id sudah ada ");
     }
 }
 ?>

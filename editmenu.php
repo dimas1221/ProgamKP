@@ -33,7 +33,7 @@ if (isset($_POST['simpan'])) {
 	if (!$ubah) {
 		echo "<b>Data Gagal Diubah</b>";
 	} else {
-		echo "<b>Data Berhasil Diubah</b>";
+		header("location: tambahmenu.php");
 	}
 }
 ?>

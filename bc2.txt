@@ -1,0 +1,174 @@
+<?php
+include 'database/koneksidb.php';
+if (!isset($_POST['simpan_id_pemesan'])) {
+    header('location: pesanan.php');
+    exit();
+}
+
+$simpan_id_pemesan  = $_POST['simpan_id_pemesan'];
+$simpan_kd_menu = $_POST['simpan_kd_menu'];
+$jumlah = $_POST['jumlah'];
+$count = count($simpan_id_pemesan);
+
+$sql   = "INSERT INTO pesanan (id_pemesan,kd_menu,jumlah) VALUES ";
+
+for ($i = 0; $i < $count; $i++) {
+    $sql .= "('{$simpan_id_pemesan[$i]}','{$simpan_kd_menu[$i]}','{$jumlah[$i]}')";
+    $sql .= ",";
+}
+
+$sql = rtrim($sql, ",");
+
+$insert = mysqli_query($conn, $sql);
+
+if (!$insert) {
+    echo "gagal insert : ";
+} else {
+    header('location: transaksi.php');
+}
+
+<select class="form-select" aria-label="Default select example" name="jumlah[]">
+                      <option selected>masukan jumlah</option>
+                      <?php for ($j = 1; $j <= 99; $j++) {
+                      ?>
+                        <option value="<?php echo $j; ?>"><?php echo $j; ?></option>
+                      <?php } ?>
+                    </select>
+
+
+                    <?php
+include 'database/koneksidb.php';
+
+$a = $_POST['kd_menu'];
+
+$jml = count($a);
+for ($i = 0; $i < $jml; $i++) {
+    $sql = "INSERT INTO pesanan (id_pesanan,id_pemesan,kd_menu,jumlah,total) 
+    VALUES ('','$_POST[id_pemesan]','$a[$i]','$_POST[jumlah]','')";
+    $call = mysqli_query($conn, $sql);
+}
+if ($call) {
+    header('location: transaksi.php');
+} else {
+
+    echo "gagal tambah data";
+}
+
+// 2
+<?php
+include 'database/koneksidb.php';
+
+$a = $_POST['kd_menu'];
+$b = $_POST['jumlah'];
+
+$jml = count($a);
+$jmlb = count($b);
+for ($i = 0; $i < $jml == $jmlb; $i++) {
+    $sql = "INSERT INTO pesanan (id_pesanan,id_pemesan,kd_menu,jumlah) 
+    VALUES ('','$_POST[id_pemesan]','$a[$i]',$b[$i])";
+    $call = mysqli_query($conn, $sql);
+}
+if ($call) {
+    header('location: transaksi.php');
+} else {
+
+    echo "gagal tambah data";
+}
+
+//3
+<?php
+include 'database/koneksidb.php';
+
+$id_pemesan = $_POST['id_pemesan'];
+$kd_menu = $_POST['kd_menu'];
+$jumlah_menu = $_POST['jumlah_menu'];
+
+$jumlah_pesanan = count($kd_menu);
+
+for ($x = 0; $x < $jumlah_pesanan; $x++) {
+    $sql = "INSERT INTO pesanan values ('', '$id_pemesan', '$kd_menu[$x]', '$jumlah_menu[$x]')";
+    $call = mysqli_query($conn, $sql);
+}
+
+if ($call) {
+    header('location: transaksi.php');
+} else {
+
+    echo "gagal tambah data";
+}
+
+//4
+$id_pemesan = $_POST['id_pemesan'];
+$kd_menu = $_POST['kd_menu'];
+$jumlah_menu = $_POST['jumlah_menu'];
+ 
+if(isset($_POST['submit'])){
+$checked_array = $_POST['kd_menu'];
+ 
+foreach($_POST['kd_menu'] as $key => value){
+if(in_array($_POST['kd_menu'][$key], $checked_array)){
+$kd_menu = $_POST['kd_menu'][$key];
+$jumlah_menu = $_POST['jumlah_menu'][$key];
+ 
+$sql = "INSERT INTO pesanan (id_pesanan, id_pemesan, kd_menu, jumlah) VALUES ('', '$id_pemesan', '$kd_menu', '$jumlah')";
+$call = mysqli_query($conn, $sql);
+}
+}
+}
+
+//5
+$kd_menu = $_POST['kd_menu'] ;
+$jumlah_menu = $_POST['jumlah_menu'] ;
+
+$items = array();
+
+$size = count($names);
+
+for($i = 0 ; $i < $size ; $i++){
+  $items[$i] = array(
+     "kd_menu"  => $kd_menu[$i], 
+     "jumlah_menu"    => $jumlah_menu[$i]
+  );
+}
+
+//
+$id_pemesan = $_POST['id_pemesan'];
+$kd_menu = $_POST['kd_menu'];
+$jumlah_menu = $_POST['jumlah_menu'];
+
+if (isset($_POST['submit'])) {
+    $array = 0;
+    foreach ($_POST['kd_menu'] as $k => $value) {
+        $kd_menu = addslashes($value);
+        $jumlah_menu = addslashes($_POST['jumlah_menu'][$array]);
+
+        $sql = "INSERT INTO pesanan (id_pesanan, id_pemesan, kd_menu, jumlah) 
+        VALUES ('', '" . $id_pemesan . "', '" . $kd_menu . "', '" . $jumlah_menu . "')";
+        $array++;
+        $call = mysqli_query($conn, $sql);
+    }
+}
+if ($call) {
+    header('location: transaksi.php');
+} else {
+
+    echo "gagal tambah data";
+}
+
+//
+ <?php $k = 1; ?>
+                    <?php
+                    while ($data = mysqli_fetch_array($call2)) {
+                    ?>
+                      <tr>
+                        <td><?php echo $k++; ?> </td>
+                        <td><input type="checkbox" name="kd_menu[]" value="<?php echo $data['kd_menu'] ?>">
+                          <?php echo $data['nama_menu'] ?></td>
+                        <td><input type="number" name="jumlah_menu[]"></td>
+                      </tr>
+                    <?php
+                    }
+                    ?>
+
+
+

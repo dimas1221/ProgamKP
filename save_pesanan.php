@@ -1,20 +1,18 @@
 <?php
 include 'database/koneksidb.php';
-//input data
-$simpan_id_pemesan = isset($_POST['simpan_id_pemesan']) ? $_POST['simpan_id_pemesan'] : '';
-$simpan_kd_menu = $_POST['simpan_kd_menu'];
-$simpan_jumlah = $_POST['simpan_jumlah'];
 
-//query memasukan data ke database
-$query5 = "INSERT INTO pesanan (id_pemesan,kd_menu,jumlah)
-    VALUES ('$simpan_id_pemesan','$simpan_kd_menu','$simpan_jumlah')";
-
-//Function untuk memasukan data input ke database
-$hasil = mysqli_query($conn, $query5);
-
-//Pengecheckan input data
-if ($hasil) {
-    header("location: pesanan.php");
+$a = $_POST['kd_menu'];
+$b = $_POST['jumlah_menu'];
+$jmlb = count($b);
+$jml = count($a);
+for ($i = 0; $i < $jml == $jmlb; $i++) {
+    $sql = "INSERT INTO pesanan (id_pesanan,id_pemesan,kd_menu,jumlah,total) 
+    VALUES ('','$_POST[id_pemesan]','$a[$i]','$b[$i]',NULL)";
+    $call = mysqli_query($conn, $sql);
+}
+if ($call) {
+    header('location: transaksi.php');
 } else {
-    echo "<b>Gagal Menambahkan data</b>";
+
+    echo "gagal tambah data";
 }

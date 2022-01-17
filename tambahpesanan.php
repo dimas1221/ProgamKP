@@ -220,7 +220,9 @@
                   <td><?php echo $tampil['id_pemesan']; ?></td>
                   <td><?php echo $tampil['nama_pemesan']; ?> </td>
                   <td><?php echo $tampil['tanggal_pesan']; ?> </td>
-                  <td><a href="detailpesan.php?id=<?php echo $tampil['id_pemesan']; ?>" class="btn btn-outline-warning" style="width: 100px;">Pay</a></td>
+                  <td>
+                    <a href="pesanan.php?id=<?php echo $tampil['id_pemesan']; ?>" class="btn btn-outline-warning" style="width: 90px;">pesan</a>
+                  </td>
                 </tr>
               <?php } ?>
             </tbody>

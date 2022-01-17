@@ -169,6 +169,20 @@ function rupiah3($jumlah)
         <div class="col-md-10 p-5 pt-2">
             <h3><i class="fas fa-tachometer-alt mr-2"></i>Riwayat Pesanan</h3>
             <hr>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <form action="" method="POST" class="form inlime">
+                            <input type="date" name="tgl_mulai" class="form-control">
+                            <br>
+                            <input type="date" name="tgl_selesai" class="form-control">
+                            <br>
+                            <button type="submit" name="filter_tgl" class="btn btn-info">filter</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <br>
             <!-- awal tabel -->
             <div>
                 <table id="example" class="table table-striped table-bordered" style="width:100%">
@@ -186,7 +200,31 @@ function rupiah3($jumlah)
                     </thead>
                     <tbody>
                         <?php $i = 1; ?>
-                        <?php while ($tampil = mysqli_fetch_array($call)) {
+                        <?php
+                        if (isset($_POST['filter_tgl'])) {
+                            $mulai = $_POST['tgl_mulai'];
+                            $selesai = $_POST['tgl_selesai'];
+
+                            if ($mulai != null || $selesai != null) {
+                                $query = "SELECT nama_pemesan, nama_menu, harga, jumlah, total, tanggal_pesan 
+                                FROM pesanan INNER JOIN pemesan USING (id_pemesan) INNER JOIN menu USING (kd_menu) WHERE  (tanggal_pesan 
+                                BETWEEN '$mulai' AND '$selesai')";
+                                //Memanggil Data
+                                $call = mysqli_query($conn, $query);
+                            } else {
+                                $query = "SELECT nama_pemesan, nama_menu, harga, jumlah, total, tanggal_pesan FROM pesanan INNER JOIN pemesan USING (id_pemesan) 
+                                INNER JOIN menu USING (kd_menu)";
+                                //Memanggil Data
+                                $call = mysqli_query($conn, $query);
+                            }
+                        } else {
+                            $query = "SELECT nama_pemesan, nama_menu, harga, jumlah, total, tanggal_pesan FROM pesanan INNER JOIN pemesan USING (id_pemesan) 
+                            INNER JOIN menu USING (kd_menu)";
+                            //Memanggil Data
+                            $call = mysqli_query($conn, $query);
+                        }
+
+                        while ($tampil = mysqli_fetch_array($call)) {
                             $jumlah = $tampil['harga'] * $tampil['jumlah']; ?>
                             <tr>
                                 <td><?php echo $i++; ?></td>

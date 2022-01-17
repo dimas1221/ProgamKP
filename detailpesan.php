@@ -12,7 +12,7 @@ $data_user = mysqli_fetch_array($calluser);
 //end
 //Query Menampilkan data
 $id = $_GET['id'];
-$query = "SELECT nama_pemesan, nama_menu, harga, jumlah, total FROM pesanan INNER JOIN pemesan USING (id_pemesan) 
+$query = "SELECT id_pesanan, id_pemesan, nama_pemesan, nama_menu, harga, jumlah, total FROM pesanan INNER JOIN pemesan USING (id_pemesan) 
 INNER JOIN menu USING (kd_menu) WHERE id_pemesan ='$id'";
 //Memanggil Data
 $call = mysqli_query($conn, $query);
@@ -43,6 +43,33 @@ function rupiah3($jumlah)
     $hasil_rupiah = "Rp " . number_format($jumlah, 0, ".", ".");
     return $hasil_rupiah;
 }
+
+//menampilkan queri sts
+$querysts1 = "SELECT * FROM pemesan WHERE id_pemesan='$id'";
+
+$tampilsts = mysqli_query($conn, $querysts1);
+//end
+
+//update status payment
+if (isset($_POST['simpan'])) {
+    $id = $_POST['id'];
+    $status = $_POST['status'];
+
+    //Query edit data
+    $querysts = "UPDATE pemesan SET
+	 id_pemesan ='$id',
+	 status ='$status'
+	 WHERE id_pemesan = '$id'";
+
+    $ubah = mysqli_query($conn, $querysts);
+
+    if (!$ubah) {
+        echo "<b>Data Gagal Diubah</b>";
+    } else {
+        header("location: transaksi.php");
+    }
+}
+//end
 ?>
 <!doctype html>
 <html lang="en">
@@ -193,6 +220,7 @@ function rupiah3($jumlah)
                             <th>harga</th>
                             <th>jumlah</th>
                             <th><?php echo "total = " . rupiah1($row['total']); ?></th>
+                            <th>action</th>
 
                         </tr>
                     </thead>
@@ -208,12 +236,34 @@ function rupiah3($jumlah)
                                 <td><?php echo rupiah2($tampil['harga']); ?> </td>
                                 <td><?php echo $tampil['jumlah']; ?> </td>
                                 <td><?php echo rupiah3($jumlah) ?></td>
+                                <td>
+                                    <a href="hapus_pesanan.php?id=<?php echo $tampil['id_pesanan']; ?>" class="btn btn-outline-danger" style="width: 90px;">Delete</a>
+                                </td>
                             </tr>
 
                         <?php } ?>
                     </tbody>
 
                 </table>
+                <?php while ($show = mysqli_fetch_array($tampilsts)) { ?>
+                    <table class="table table-bordered mt-5">
+                        <tr>
+                            <td>
+                                <form method="post">
+                                    <label for="">Klik finish untuk menyelesaikan pesanan :</label>
+                                    <div>
+                                        <input type="hidden" name="id" value="<?= $show['id_pemesan'] ?>" readonly>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <input type="hidden" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="status" value="selesai" readonly>
+                                    </div>
+
+                                    <button name="simpan" class="btn btn-success">Finish</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                <?php } ?>
                 <!-- akhir tabel -->
                 <script>
                     $(document).ready(function() {

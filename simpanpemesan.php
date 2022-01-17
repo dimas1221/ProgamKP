@@ -17,7 +17,7 @@ $hasil = mysqli_query($conn, $query);
 
 //Pengecheckan input data
 if ($hasil) {
-    header("location: pesanan.php");
+    header("location: tambahpesanan.php");
 } else {
     echo "<b>Gagal Menambahkan data</b>";
 }

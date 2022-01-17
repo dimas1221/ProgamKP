@@ -44,6 +44,23 @@ if (isset($_POST['tambah_data'])) {
         alertWindow("Menu gagal di tambahkan karena id sudah ada ");
     }
 }
+//query otomatis tambah id menu
+$queryidmenu = mysqli_query($conn, "SELECT MAX(kd_menu) AS kodeTerbesar FROM menu;");
+$dataidmenu = mysqli_fetch_array($queryidmenu);
+
+$kodemenu = $dataidmenu['kodeTerbesar'];
+
+// mengambil angka dari kode barang terbesar, menggunakan fungsi substr dan diubah ke integer dengan (int)
+$urutan = (int) substr($kodemenu, 3, 3);
+// nomor yang diambil akan ditambah 1 untuk menentukan nomor urut berikutnya
+$urutan++;
+// membuat kode barang baru
+// string sprintf("%03s", $urutan); berfungsi untuk membuat string menjadi 3 karakter
+// misalnya string sprintf("%03s", 22); maka akan menghasilkan '022'
+// angka yang diambil tadi digabungkan dengan kode huruf yang kita inginkan, misalnya PC
+$huruf = "M";
+$kodemenu = $huruf . sprintf("%03s", $urutan);
+//end
 ?>
 
 
@@ -117,7 +134,7 @@ if (isset($_POST['tambah_data'])) {
                 <form method="post" class="login100-form validate-form">
                     <div class="wrap-input100 validate-input m-b-23" data-validate="Username is reauired">
                         <span class="label-input100">Id Menu :</span>
-                        <input class="input100" type="text" name="simpan_kd_menu" placeholder="Masukan id" required>
+                        <input class="input100" type="text" name="simpan_kd_menu" placeholder="Masukan id" required value="<?= $kodemenu; ?>" readonly>
                     </div>
                     <div class="wrap-input100 validate-input m-b-23" data-validate="Username is reauired">
                         <span class="label-input100">Nama Menu :</span>

@@ -1,20 +1,40 @@
-<?php
+<html>
 
-include 'database/koneksidb.php';
+<head>
+    <!-- css swalert2 -->
+    <link rel="stylesheet" href="swalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="swalert2/animate.min.css">
+    <!-- end -->
+    <!-- scrip swalert 2 -->
+    <script src="swalert2/sweetalert2.min.js"></script>
+    <!-- end -->
+</head>
 
-$id = $_GET['id'];
+<body>
+    <?php
 
-$query = "DELETE FROM pesanan WHERE id_pesanan = '$id'";
+    include 'database/koneksidb.php';
 
-$delete = mysqli_query($conn, $query);
-if (!$delete) {
-    echo "<b>Hapus Data Gagal</b>";
-} else {
-    function alertWindow($msg)
-    {
-        echo "<script type ='text/JavaScript'>";
-        echo "alert('$msg')";
-        echo "</script>";
+    $id = $_GET['id'];
+
+    $query = "DELETE FROM pesanan WHERE id_pesanan = '$id'";
+
+    $delete = mysqli_query($conn, $query);
+    if (!$delete) {
+        echo "<b>Hapus Data Gagal</b>";
+    } else {
+        echo "<script type='text/javascript'>
+      setTimeout(function (){
+        Swal.fire({
+            icon: 'success',
+            title: 'succes',
+            text: 'Berhasil menghapus data!'
+          });
+         
+      });
+      </script>";
     }
-    alertWindow("Menu berhasil di hapus");
-}
+    ?>
+</body>
+
+</html>

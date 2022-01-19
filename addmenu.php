@@ -27,13 +27,20 @@ if (isset($_POST['tambah_data'])) {
 
     //Pengecheckan input data
     if ($hasil) {
-        function alertWindow($msg)
-        {
-            echo "<script type ='text/JavaScript'>";
-            echo "alert('$msg')";
-            echo "</script>";
-        }
-        alertWindow("Menu berhasil di tambahkan ");
+        echo "<script type='text/javascript'>
+        setTimeout(function (){
+          Swal.fire({
+              icon: 'success',
+              title: 'success',
+              text: 'Berhasil menambah data menu!',
+              showConfirmButton: true,
+              timer: 3200
+            });
+        },10);
+        window.setTimeout(function(){
+          window.location.replace('addmenu.php');
+      } ,3000);
+        </script>";
     } else {
         function alertWindow($msg)
         {
@@ -100,6 +107,13 @@ $kodemenu = $huruf . sprintf("%03s", $urutan);
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!--===============================================================================================-->
+    <!-- css swalert2 -->
+    <link rel="stylesheet" href="swalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="swalert2/animate.min.css">
+    <!-- end -->
+    <!-- scrip swalert 2 -->
+    <script src="swalert2/sweetalert2.min.js"></script>
+    <!-- end -->
     <title>Data's Edit</title>
 </head>
 

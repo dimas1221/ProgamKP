@@ -34,7 +34,42 @@
   $huruf = "PS";
   $kodepemesan = $huruf . sprintf("%03s", $urutan);
   //end
+  //tambah pemesan
+  if (isset($_POST['tambah'])) {
+    $id_pemesan = $_POST['id_pemesan'];
+    $nama_pemesan = $_POST['nama_pemesan'];
+    $tanggal_pesan = $_POST['tanggal_pesan'];
+    $id_user = $_POST['id_user'];
 
+
+    //query memasukan data ke database
+    $query = "INSERT INTO pemesan (id_pemesan,nama_pemesan,tanggal_pesan,id_user)
+      VALUES ('$id_pemesan','$nama_pemesan','$tanggal_pesan','$id_user')";
+
+    //Function untuk memasukan data input ke database
+    $hasil = mysqli_query($conn, $query);
+
+    //Pengecheckan input data
+    if ($hasil) {
+      echo "<script type='text/javascript'>
+        setTimeout(function (){
+          Swal.fire({
+              icon: 'success',
+              title: 'success',
+              text: 'Berhasil menambah data pemesan!',
+              showConfirmButton: true,
+              timer: 3200
+            });
+        },10);
+        window.setTimeout(function(){
+          window.location.replace('tambahpesanan.php');
+      } ,3000);
+        </script>";
+    } else {
+      echo "<b>Gagal Menambahkan data</b>";
+    }
+  }
+  //end
   ?>
   <!doctype html>
   <html lang="en">
@@ -74,6 +109,10 @@
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!--===============================================================================================-->
+    <!-- css swalert2 -->
+    <link rel="stylesheet" href="swalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="swalert2/animate.min.css">
+    <!-- end -->
     <!-- libralis js  -->
     <!-- js bootstap -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -86,6 +125,9 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
+    <!-- end -->
+    <!-- scrip swalert 2 -->
+    <script src="swalert2/sweetalert2.min.js"></script>
     <!-- end -->
     <title>Hello, world!</title>
   </head>
@@ -167,7 +209,7 @@
             </button>
             <!-- awal dropdown menu -->
             <div class="dropdown-menu">
-              <form method="post" action="simpanpemesan.php">
+              <form method="post" action="">
                 <table width="190 %" align="center" class="table table-dark table-hover">
                   <tr>
                     <td>
@@ -187,7 +229,7 @@
                     <td><input class="form-control" type="date" name="tanggal_pesan" placeholder="tanggal pesan"></td>
                   </tr>
                   <tr>
-                    <td style="text-align: center;"><button class="btn btn-outline-success">Add</button></td>
+                    <td style="text-align: center;"><button class="btn btn-outline-success" name="tambah">Add</button></td>
                   </tr>
                 </table>
               </form>

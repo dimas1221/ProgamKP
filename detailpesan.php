@@ -66,7 +66,20 @@ if (isset($_POST['simpan'])) {
     if (!$ubah) {
         echo "<b>Data Gagal Diubah</b>";
     } else {
-        header("location: transaksi.php");
+        echo "<script type='text/javascript'>
+        setTimeout(function (){
+          Swal.fire({
+              icon: 'success',
+              title: 'success',
+              text: 'Transaksi berhasil!',
+              showConfirmButton: true,
+              timer: 3200
+            });
+        },10);
+        window.setTimeout(function(){
+          window.location.replace('transaksi.php');
+      } ,3000);
+        </script>";
     }
 }
 //end
@@ -110,7 +123,9 @@ if (isset($_POST['simpan'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.1.0/css/buttons.bootstrap4.min.css">
-
+    <!-- css swalert2 -->
+    <link rel="stylesheet" href="swalert2/sweetalert2.min.css">
+    <!-- end -->
     <!-- libralis js  -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -129,6 +144,9 @@ if (isset($_POST['simpan'])) {
     <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.colVis.min.js"></script>
+    <!-- end -->
+    <!-- scrip swalert 2 -->
+    <script src="swalert2/sweetalert2.min.js"></script>
     <!-- end -->
     <title>Hello, world!</title>
 </head>

@@ -21,13 +21,20 @@ if (isset($_POST['tambah_data'])) {
 
     //Pengecheckan input data
     if ($hasil) {
-        function alertWindow($msg)
-        {
-            echo "<script type ='text/JavaScript'>";
-            echo "alert('$msg')";
-            echo "</script>";
-        }
-        alertWindow("User berhasil di tambahkan ");
+        echo "<script type='text/javascript'>
+        setTimeout(function (){
+          Swal.fire({
+              icon: 'success',
+              title: 'success',
+              text: 'Berhasil menambah data user!',
+              showConfirmButton: true,
+              timer: 3200
+            });
+        },10);
+        window.setTimeout(function(){
+          window.location.replace('tambah_user.php');
+      } ,3000);
+        </script>";
     } else {
         echo "<b>Gagal Menambahkan data</b>";
     }
@@ -89,6 +96,13 @@ $kodepemesan = $huruf . sprintf("%03s", $urutan);
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!--===============================================================================================-->
+    <!-- css swalert2 -->
+    <link rel="stylesheet" href="swalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="swalert2/animate.min.css">
+    <!-- end -->
+    <!-- scrip swalert 2 -->
+    <script src="swalert2/sweetalert2.min.js"></script>
+    <!-- end -->
     <title>Data's Edit</title>
 </head>
 
@@ -108,7 +122,7 @@ $kodepemesan = $huruf . sprintf("%03s", $urutan);
 
         <div class="icon ml-4">
             <h5>
-                <a href="tambahmenu.php" class="btn btn-outline-danger">BACK</a>
+                <a href="tampil_user.php" class="btn btn-outline-danger">BACK</a>
             </h5>
         </div>
         </div>
@@ -119,7 +133,7 @@ $kodepemesan = $huruf . sprintf("%03s", $urutan);
     <div class="limiter">
         <div class="container-login100" style="background-image: url('images/bg-01.jpg'); height:900px;">
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-                <span class="login100-form-title p-b-49">Input Menu</span>
+                <span class="login100-form-title p-b-49">Add new user</span>
                 <form method="post" class="login100-form validate-form">
                     <div class="wrap-input100 validate-input m-b-23" data-validate="Username is reauired">
                         <span class="label-input100">id user :</span>

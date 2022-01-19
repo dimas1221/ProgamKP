@@ -124,10 +124,7 @@ $call = mysqli_query($conn, $query);
           </div>
           <hr class="bg-secondary">
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="pesanan.php">Pesanan</a>
-          <hr class="bg-secondary">
-        </li>
+
         <li class="nav-item">
           <a class="nav-link disabled text-white" href="#">transaksi</a>
           <hr class="bg-secondary">

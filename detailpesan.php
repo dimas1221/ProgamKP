@@ -189,10 +189,7 @@ if (isset($_POST['simpan'])) {
                     </div>
                     <hr class="bg-secondary">
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="pesanan.php">Pesanan</a>
-                    <hr class="bg-secondary">
-                </li>
+
                 <li class="nav-item">
                     <a class="nav-link text-white" href="transaksi.php">transaksi</a>
                     <hr class="bg-secondary">
@@ -219,9 +216,9 @@ if (isset($_POST['simpan'])) {
                             <th>nama menu</th>
                             <th>harga</th>
                             <th>jumlah</th>
-                            <th><?php echo "total = " . rupiah1($row['total']); ?></th>
+                            <th><?php echo "total  " . rupiah1($row['total']); ?></th>
                             <th>action</th>
-
+                            <th>action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -237,13 +234,14 @@ if (isset($_POST['simpan'])) {
                                 <td><?php echo $tampil['jumlah']; ?> </td>
                                 <td><?php echo rupiah3($jumlah) ?></td>
                                 <td>
+                                    <a href="pesanan.php?id=<?php echo $tampil['id_pemesan']; ?>" class="btn btn-outline-warning" style="width: 90px;">+</a>
+                                </td>
+                                <td>
                                     <a href="hapus_pesanan.php?id=<?php echo $tampil['id_pesanan']; ?>" class="btn btn-outline-danger" style="width: 90px;">Delete</a>
                                 </td>
                             </tr>
-
                         <?php } ?>
                     </tbody>
-
                 </table>
                 <?php while ($show = mysqli_fetch_array($tampilsts)) { ?>
                     <table class="table table-bordered mt-5">

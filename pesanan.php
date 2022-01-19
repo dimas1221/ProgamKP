@@ -55,28 +55,6 @@ if (isset($_SESSION['level'])) {
     }
   }
   //end
-  //edit jumlah
-  if (isset($_POST['edit'])) {
-    $id = $_POST['id'];
-    $j = $_POST['jumlah_menu'];
-    $p = $_POST['id_pesanan'];
-    $jmlp = count($j);
-    for ($i = 0; $i < $jmlp; $i++) {
-      $query2 = "UPDATE pesanan SET
-      id_pesanan='$p[$i]',
-      id_pemesan='$id[$i]',
-      jumlah='$j[$i]'
-      WHERE id_pesanan='$p[$i]'";
-    }
-
-    $ubah = mysqli_query($conn, $query2);
-    if (!$ubah) {
-      echo "<b>Data Gagal Diubah</b>";
-    } else {
-      header('location: transaksi.php');
-    }
-  }
-  //end
 
 ?>
   <!doctype html>
@@ -188,10 +166,7 @@ if (isset($_SESSION['level'])) {
             </div>
             <hr class="bg-secondary">
           </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="#">Pesanan</a>
-            <hr class="bg-secondary">
-          </li>
+
           <li class="nav-item">
             <a class="nav-link text-white" href="transaksi.php">transaksi</a>
             <hr class="bg-secondary">
@@ -210,16 +185,19 @@ if (isset($_SESSION['level'])) {
         </span>
         <div class="container">
           <div class="row">
-            <div class="col 4">
+            <div class="col">
               <form action="" method="post">
                 <input type="text" name="id_pemesan" value="<?php echo $show['id_pemesan']; ?>" readonly>
                 <hr class="bg-secondary">
+                <div>
+                  <button class="btn btn-outline-success" type="Submit" name="submit">Add</button>
+                </div>
                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                   <thead>
                     <tr>
                       <th>no</th>
+                      <th>#</th>
                       <th>menu</th>
-                      <th>i menu</th>
                       <th>jumlah</th>
                     </tr>
                   </thead>
@@ -239,40 +217,6 @@ if (isset($_SESSION['level'])) {
                     ?>
                   </tbody>
                 </table>
-                <div>
-                  <button class="btn btn-outline-success" type="Submit" name="submit">Add</button>
-                </div>
-              </form>
-            </div>
-            <div class="col 4">
-              <form action="" method="POST">
-                <table class="table table-striped table-bordered">
-                  <thead>
-                    <tr>
-                      <th>No</th>
-                      <th>id</th>
-                      <td>pemesan</td>
-                      <th>nama menu</th>
-                      <th>jumlah</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php $i = 1; ?>
-                    <?php while ($tampil = mysqli_fetch_array($calledit)) {
-                    ?>
-                      <tr>
-                        <td><?php echo $i++; ?></td>
-                        <td><input style="width: 50px;" type="text" name="id_pesanan[]" value="<?= $tampil['id_pesanan']; ?>" readonly></td>
-                        <td><input style="width: 50px;" type="text" name="id[]" value="<?php echo $tampil['id_pemesan']; ?>" readonly></td>
-                        <td><?php echo $tampil['nama_menu']; ?> </td>
-                        <td><input style="width: 50px;" type="number" name="jumlah_menu[]" value="<?php echo $tampil['jumlah']; ?>"></td>
-                      </tr>
-
-                    <?php } ?>
-                  </tbody>
-
-                </table>
-                <button name="edit" class="btn btn-success">SAVE</button>
               </form>
             </div>
           </div>
@@ -280,7 +224,11 @@ if (isset($_SESSION['level'])) {
       </div>
       <script>
         $(document).ready(function() {
-          $('#example').DataTable();
+          $('#example').DataTable({
+            "paging": false,
+            "ordering": false,
+            "info": false
+          });
         });
       </script>
   </body>

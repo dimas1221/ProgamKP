@@ -170,5 +170,27 @@ if ($call) {
                     }
                     ?>
 
+//
+ <tr>
+                      <td>1</td>
+                      <td><input type="checkbox" value="A311ANGMH" name="kd_menu[]">Anggur mini hot</td>
+                      <td><input type="number" name="jumlah_menu[]"></td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td><input type="checkbox" value="A411MELMH" name="kd_menu[]">melon mini hot</td>
+                      <td><input type="number" name="jumlah_menu[]"></td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td><input type="checkbox" value="A511DURMH" name="kd_menu[]">durian mini hot</td>
+                      <td><input type="number" name="jumlah_menu[]"></td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td><input type="checkbox" value="A711VANMH" name="kd_menu[]">vanila mini hot</td>
+                      <td><input type="number" name="jumlah_menu[]"></td>
+                    </tr>
+
 
 

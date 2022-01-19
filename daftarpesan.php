@@ -154,10 +154,7 @@ function rupiah3($jumlah)
                     </div>
                     <hr class="bg-secondary">
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="pesanan.php">Pesanan</a>
-                    <hr class="bg-secondary">
-                </li>
+
                 <li class="nav-item">
                     <a class="nav-link text-white" href="transaksi.php">transaksi</a>
                     <hr class="bg-secondary">
@@ -173,11 +170,11 @@ function rupiah3($jumlah)
                 <div class="row">
                     <div class="col">
                         <form action="" method="POST" class="form inlime">
-                            <input type="date" name="tgl_mulai" class="form-control">
-                            <br>
-                            <input type="date" name="tgl_selesai" class="form-control">
-                            <br>
-                            <button type="submit" name="filter_tgl" class="btn btn-info">filter</button>
+                            <input style="width: 150px; float:left;" type="date" name="tgl_mulai" class="form-control mr-2">
+
+                            <input style="width: 150px; float:left;" type="date" name="tgl_selesai" class="form-control mr-2">
+
+                            <button type="submit" name="filter_tgl" class="btn btn-info p2" style="float: left;">filter</button>
                         </form>
                     </div>
                 </div>
@@ -195,7 +192,7 @@ function rupiah3($jumlah)
                             <th>harga</th>
                             <th>jumlah</th>
                             <th>tanggal_pesan</th>
-                            <th><?php echo "total = " . rupiah1($row['total']); ?></th>
+                            <th><?php echo "total " . rupiah1($row['total']); ?></th>
                         </tr>
                     </thead>
                     <tbody>

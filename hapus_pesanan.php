@@ -18,8 +18,3 @@ if (!$delete) {
     }
     alertWindow("Menu berhasil di hapus");
 }
-
-
-?>
-<br>
-<a href="tambahmenu.php">BACK</a>

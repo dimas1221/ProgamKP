@@ -120,10 +120,7 @@
             </div>
             <hr class="bg-secondary">
           </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="pesanan.php">Pesanan</a>
-            <hr class="bg-secondary">
-          </li>
+
           <li class="nav-item">
             <a class="nav-link text-white" href="transaksi.php">transaksi</a>
             <hr class="bg-secondary">
@@ -157,7 +154,7 @@
               <th>jenis Menu</th>
               <th>produk</th>
               <th>Harga</th>
-              <th>Action</th>
+              <th>action</th>
               <th>action</th>
             </tr>
           </thead>

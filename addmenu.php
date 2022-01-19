@@ -58,7 +58,7 @@ $urutan++;
 // string sprintf("%03s", $urutan); berfungsi untuk membuat string menjadi 3 karakter
 // misalnya string sprintf("%03s", 22); maka akan menghasilkan '022'
 // angka yang diambil tadi digabungkan dengan kode huruf yang kita inginkan, misalnya PC
-$huruf = "M";
+$huruf = "MN";
 $kodemenu = $huruf . sprintf("%03s", $urutan);
 //end
 ?>

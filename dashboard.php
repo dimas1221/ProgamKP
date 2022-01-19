@@ -109,10 +109,7 @@ if (isset($_SESSION['level'])) {
             </div>
             <hr class="bg-secondary">
           </li>
-          <li class="nav-item">
-            <a class="nav-link text-white, txt2" href="pesanan.php" style="color: ghostwhite;">Pesanan</a>
-            <hr class="bg-secondary">
-          </li>
+
           <li class="nav-item">
             <a class="nav-link disabled text-white, txt2" href="transaksi.php" style="color: ghostwhite;">transaksi</a>
             <hr class="bg-secondary">

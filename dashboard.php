@@ -123,26 +123,26 @@ if (isset($_SESSION['level'])) {
         <hr>
         <!-- awal card -->
         <div class="row">
-          <div class="col-sm-6">
+          <div class="col 4-md-4 sm-6">
             <div class="card">
-              <img class="card-img-top" src="fgambar/144.jpg" alt="Card image cap">
+              <center><img class="card-img-top" src="fgambar/144.jpg" alt="Card image cap"></center>
               <div class="card-body">
                 <?php
                 $level = $_SESSION['level'] == 'admin';
                 if ($level) {
                 ?>
-                  <a href="tambahmenu.php" class="btn btn-outline-info" style="width: 420px;">Admin Page</a>
+                  <center> <a href="tambahmenu.php" class="btn btn-outline-info" style="width: 420px;">Admin Page</a></center>
                 <?php } else { ?>
-                  <a href="#" class="btn btn-outline-info" style="width: 420px;">You Can't Access This Pages</a>
+                  <center><a href="#" class="btn btn-outline-info" style="width: 420px;">You Can't Access This Pages</a></center>
                 <?php } ?>
               </div>
             </div>
           </div>
-          <div class="col-sm-6">
+          <div class="col 4-md-4 sm-6">
             <div class="card">
-              <img class="card-img-top" src="fgambar/144.jpg" alt="Card image cap">
+              <center><img class="card-img-top" src="fgambar/144.jpg" alt="Card image cap"></center>
               <div class="card-body">
-                <a href="tambahpesanan.php" class="btn btn-outline-info" style="width: 420px;">Order</a>
+                <center><a href="tambahpesanan.php" class="btn btn-outline-info" style="width: 420px;">Order</a></center>
               </div>
             </div>
           </div>

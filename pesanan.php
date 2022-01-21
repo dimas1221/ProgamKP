@@ -176,7 +176,7 @@ if (isset($_SESSION['level'])) {
       <!-- akhir sidebar -->
       <!-- dashboard -->
       <div class="col-md-10 p-5 pt-2">
-        <h3><i class="fas fa-tachometer-alt mr-2"></i></h3>
+        <h3><i class="fas fa-tachometer-alt mr-2"></i> Input Order</h3>
         <hr class="bg-secondary">
         <!-- awal tabel -->
         <?php foreach ($call12 as $show) ?>
@@ -192,7 +192,7 @@ if (isset($_SESSION['level'])) {
                 <div>
                   <button class="btn btn-outline-success" type="Submit" name="submit">Add</button>
                 </div>
-                <table id="example" class="table table-striped table-bordered" style="width:100%">
+                <table id="example" class="table table-striped table-bordered" style="width: 100%;">
                   <thead>
                     <tr>
                       <th>no</th>

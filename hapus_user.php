@@ -17,7 +17,7 @@ if (!$delete) {
               title: 'success',
               text: 'Berhasil menghapus data user!',
               showConfirmButton: true,
-              timer: 3200
+              timer: 32000
             });
         },10);
         window.setTimeout(function(){

@@ -169,7 +169,7 @@
                 <td><?php echo $tampil['kd_jenis_produk']; ?> </td>
                 <td><?php echo $tampil['harga']; ?> </td>
                 <td>
-                  <a href="hapusmenu.php?id=<?php echo $tampil['kd_menu']; ?>" class="btn btn-outline-danger" style="width: 90px;">Delete</a>
+                  <a href="hapusmenu.php?id=<?php echo $tampil['kd_menu']; ?>" class="btn btn-outline-danger" style="width: 90px;" onclick="return confirm('Are you sure to delete data?')">Delete</a>
                 </td>
                 <td>
                   <a href="editmenu.php?id=<?php echo $tampil['kd_menu']; ?>" class="btn btn-outline-warning" style="width: 90px;">Edit</a>

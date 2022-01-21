@@ -16,9 +16,14 @@ INNER JOIN menu USING (kd_menu)";
 //Memanggil Data
 $call = mysqli_query($conn, $query);
 
-$queritotal = "SELECT SUM(menu.harga*pesanan.jumlah) 
-AS total FROM menu JOIN pesanan ON menu.kd_menu=pesanan.kd_menu";
-$call3 = mysqli_query($conn, $queritotal);
+// $queritotal = "SELECT SUM(menu.harga*pesanan.jumlah) 
+// AS total FROM menu JOIN pesanan ON menu.kd_menu=pesanan.kd_menu";
+// $queritotal = "SELECT SUM(menu.harga*pesanan.jumlah) 
+// AS total FROM pesanan JOIN menu ON menu.kd_menu=pesanan.kd_menu
+// JOIN pemesan ON pesanan.id_pemesan=pemesan.id_pemesan  
+// WHERE  (tanggal_pesan BETWEEN '$mulai' AND '$selesai')";
+// $call3 = mysqli_query($conn, $queritotal);
+
 
 function rupiah1($row)
 {
@@ -164,15 +169,15 @@ function rupiah3($jumlah)
         <!-- akhir sidebar -->
         <!-- dashboard -->
         <div class="col-md-10 p-5 pt-2">
-            <h3><i class="fas fa-tachometer-alt mr-2"></i>Riwayat Pesanan</h3>
+            <h3><i class="fas fa-tachometer-alt mr-2"></i>History Order</h3>
             <hr>
             <div class="container">
                 <div class="row">
                     <div class="col">
                         <form action="" method="POST" class="form inlime">
-                            <input style="width: 150px; float:left;" type="date" name="tgl_mulai" class="form-control mr-2">
+                            <input style="width: 190px; float:left;" type="date" name="tgl_mulai" class="form-control mr-2">
 
-                            <input style="width: 150px; float:left;" type="date" name="tgl_selesai" class="form-control mr-2">
+                            <input style="width: 190px; float:left;" type="date" name="tgl_selesai" class="form-control mr-2">
 
                             <button type="submit" name="filter_tgl" class="btn btn-info p2" style="float: left;">filter</button>
                         </form>
@@ -181,72 +186,78 @@ function rupiah3($jumlah)
             </div>
             <br>
             <!-- awal tabel -->
-            <div>
-                <table id="example" class="table table-striped table-bordered" style="width:100%">
-                    <thead>
-                        <tr>
-                            <?php $row = mysqli_fetch_assoc($call3) ?>
-                            <th>No</th>
-                            <th>nama pemesan</th>
-                            <th>nama menu</th>
-                            <th>harga</th>
-                            <th>jumlah</th>
-                            <th>tanggal_pesan</th>
-                            <th><?php echo "total " . rupiah1($row['total']); ?></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $i = 1; ?>
-                        <?php
-                        if (isset($_POST['filter_tgl'])) {
-                            $mulai = $_POST['tgl_mulai'];
-                            $selesai = $_POST['tgl_selesai'];
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <table id="example" class="table table-striped table-bordered" style="width: fit-content;">
+                            <thead>
+                                <tr>
 
-                            if ($mulai != null || $selesai != null) {
-                                $query = "SELECT nama_pemesan, nama_menu, harga, jumlah, total, tanggal_pesan 
+                                    <th>No</th>
+                                    <th>pemesan</th>
+                                    <th>menu</th>
+                                    <th>harga</th>
+                                    <th>jumlah</th>
+                                    <th>tanggal</th>
+                                    <th>total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $i = 1; ?>
+                                <?php
+
+                                if (isset($_POST['filter_tgl'])) {
+                                    $mulai = $_POST['tgl_mulai'];
+                                    $selesai = $_POST['tgl_selesai'];
+
+
+                                    if ($mulai != null || $selesai != null) {
+                                        $query = "SELECT nama_pemesan, nama_menu, harga, jumlah, total, tanggal_pesan 
                                 FROM pesanan INNER JOIN pemesan USING (id_pemesan) INNER JOIN menu USING (kd_menu) WHERE  (tanggal_pesan 
                                 BETWEEN '$mulai' AND '$selesai')";
-                                //Memanggil Data
-                                $call = mysqli_query($conn, $query);
-                            } else {
-                                $query = "SELECT nama_pemesan, nama_menu, harga, jumlah, total, tanggal_pesan FROM pesanan INNER JOIN pemesan USING (id_pemesan) 
+                                        //Memanggil Data
+                                        $call = mysqli_query($conn, $query);
+                                    } else {
+                                        $query = "SELECT nama_pemesan, nama_menu, harga, jumlah, total, tanggal_pesan FROM pesanan INNER JOIN pemesan USING (id_pemesan) 
                                 INNER JOIN menu USING (kd_menu)";
-                                //Memanggil Data
-                                $call = mysqli_query($conn, $query);
-                            }
-                        } else {
-                            $query = "SELECT nama_pemesan, nama_menu, harga, jumlah, total, tanggal_pesan FROM pesanan INNER JOIN pemesan USING (id_pemesan) 
+                                        //Memanggil Data
+                                        $call = mysqli_query($conn, $query);
+                                    }
+                                } else {
+                                    $query = "SELECT nama_pemesan, nama_menu, harga, jumlah, total, tanggal_pesan FROM pesanan INNER JOIN pemesan USING (id_pemesan) 
                             INNER JOIN menu USING (kd_menu)";
-                            //Memanggil Data
-                            $call = mysqli_query($conn, $query);
-                        }
+                                    //Memanggil Data
+                                    $call = mysqli_query($conn, $query);
+                                }
 
-                        while ($tampil = mysqli_fetch_array($call)) {
-                            $jumlah = $tampil['harga'] * $tampil['jumlah']; ?>
-                            <tr>
-                                <td><?php echo $i++; ?></td>
-                                <td><?php echo $tampil['nama_pemesan']; ?> </td>
-                                <td><?php echo $tampil['nama_menu']; ?> </td>
-                                <td><?php echo rupiah2($tampil['harga']); ?> </td>
-                                <td><?php echo $tampil['jumlah']; ?> </td>
-                                <td><?php echo $tampil['tanggal_pesan']; ?></td>
-                                <td><?php echo rupiah3($jumlah) ?></td>
-                            </tr>
+                                while ($tampil = mysqli_fetch_array($call)) {
+                                    $jumlah = $tampil['harga'] * $tampil['jumlah']; ?>
+                                    <tr>
+                                        <td><?php echo $i++; ?></td>
+                                        <td><?php echo $tampil['nama_pemesan']; ?> </td>
+                                        <td><?php echo $tampil['nama_menu']; ?> </td>
+                                        <td><?php echo rupiah2($tampil['harga']); ?> </td>
+                                        <td><?php echo $tampil['jumlah']; ?> </td>
+                                        <td><?php echo $tampil['tanggal_pesan']; ?></td>
+                                        <td><?php echo rupiah3($jumlah) ?></td>
+                                    </tr>
 
-                        <?php } ?>
-                    </tbody>
-                </table>
-                <script>
-                    $(document).ready(function() {
-                        var table = $('#example').DataTable({
-                            lengthChange: false,
-                            buttons: ['copy', 'excel', 'pdf', 'print', 'colvis']
-                        });
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                        <script>
+                            $(document).ready(function() {
+                                var table = $('#example').DataTable({
+                                    lengthChange: false,
+                                    buttons: ['copy', 'excel', 'pdf', 'print', 'colvis']
+                                });
 
-                        table.buttons().container()
-                            .appendTo('#example_wrapper .col-md-6:eq(0)');
-                    });
-                </script>
+                                table.buttons().container()
+                                    .appendTo('#example_wrapper .col-md-6:eq(0)');
+                            });
+                        </script>
+                    </div>
+                </div>
             </div>
             <!-- akhir tabel -->
         </div>

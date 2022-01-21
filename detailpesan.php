@@ -153,7 +153,7 @@ if (isset($_POST['simpan'])) {
 
 <body>
     <!-- awal navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-warning fixed-top" style="background-image: url('images/bg-01.jpg');">
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning fixed-top" style="background-image: url('images/bg-01.jpg'); height:82px;">
         <a class="navbar-brand" href="#">
             <div class="txt1 text-center ">
                 <h2 style="color: black;"><strong>PB</strong></h2>
@@ -166,11 +166,11 @@ if (isset($_POST['simpan'])) {
         </form>
 
         <div class="icon ml-4">
-            <h5>
+            <h6>
                 <a href="daftarpesan.php"><i class="fas fa-envelope fa-2x mr-3" data-toggle="tooltip" title="History"></i></a>
                 <a href="#"><i class="fas fa-bell fa-2x mr-3" data-toggle="tooltip" title="Notification"></i></a>
                 <a href="logout.php"><i class="fas fa-sign-out-alt fa-2x mr-3" data-toggle="tooltip" title="Log Out"></i></a>
-            </h5>
+            </h6>
         </div>
         </div>
     </nav>
@@ -217,7 +217,7 @@ if (isset($_POST['simpan'])) {
         <!-- akhir sidebar -->
         <!-- dashboard -->
         <div class="col-md-10 p-5 pt-2">
-            <h3><i class="fas fa-tachometer-alt mr-2"></i>Detail Pesanan</h3>
+            <h3><i class="fas fa-tachometer-alt mr-2"></i>Detail Order</h3>
             <hr class="bg-secondary">
             <?php foreach ($call12 as $show) ?>
             <span class="label-input100">
@@ -234,12 +234,21 @@ if (isset($_POST['simpan'])) {
                             <th>nama menu</th>
                             <th>harga</th>
                             <th>jumlah</th>
-                            <th><?php echo "total  " . rupiah1($row['total']); ?></th>
+                            <th>total</th>
                             <th>action</th>
                             <th>action</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                            <td>#</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="color: red;"><?php echo " total bayar " . rupiah1($row['total']); ?></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
                         <?php $i = 1; ?>
                         <?php while ($tampil = mysqli_fetch_array($call)) {
                             $jumlah = $tampil['harga'] * $tampil['jumlah'];
@@ -255,7 +264,7 @@ if (isset($_POST['simpan'])) {
                                     <a href="pesanan.php?id=<?php echo $tampil['id_pemesan']; ?>" class="btn btn-outline-warning" style="width: 90px;">+</a>
                                 </td>
                                 <td>
-                                    <a href="hapus_pesanan.php?id=<?php echo $tampil['id_pesanan']; ?>" class="btn btn-outline-danger" style="width: 90px;">Delete</a>
+                                    <a href="hapus_pesanan.php?id=<?php echo $tampil['id_pesanan']; ?>" class="btn btn-outline-danger" style="width: 90px;" onclick="return confirm('Are you sure to delete data?')">Delete</a>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -285,7 +294,7 @@ if (isset($_POST['simpan'])) {
                     $(document).ready(function() {
                         var table = $('#example').DataTable({
                             lengthChange: false,
-                            buttons: ['print', 'excel']
+                            buttons: ['print', 'excel', 'pdf']
                         });
 
                         table.buttons().container()

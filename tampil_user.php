@@ -167,7 +167,7 @@ $call = mysqli_query($conn, $query);
                             <td><?php echo $tampil['password']; ?> </td>
                             <td><?php echo $tampil['level']; ?> </td>
                             <td>
-                                <a href="hapus_user.php?id=<?php echo $tampil['id_user']; ?>" class="btn btn-outline-danger" style="width: 90px;">Delete</a>
+                                <a href="hapus_user.php?id=<?php echo $tampil['id_user']; ?>" class="btn btn-outline-danger" style="width: 90px;" onclick="return confirm('Are you sure to delete data?')">Delete</a>
                             </td>
                         </tr>
                     <?php } ?>

@@ -60,10 +60,18 @@ $call = mysqli_query($conn, $query);
   <script type="text/javascript" src="admin.js"></script>
   <!-- end -->
 
-  <!-- js data tables -->
+  <!-- datatable js -->
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-
+  <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.bootstrap4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.print.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.colVis.min.js"></script>
   <!-- end -->
   <title>Hello, world!</title>
 </head>
@@ -137,48 +145,48 @@ $call = mysqli_query($conn, $query);
       <h3><i class="fas fa-tachometer-alt mr-2"></i> history payment</h3>
       <hr>
       <!-- awal tabel -->
-      <div>
-        <table id="example" class="table table-striped table-bordered" style="width:100%">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>id user</th>
-              <th>id pemesan</th>
-              <th>nama pemesan</th>
-              <th>tanggal</th>
-              <th>Action</th>
-              <th>status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php $i = 1; ?>
-            <?php while ($tampil = mysqli_fetch_array($call)) { ?>
-              <tr>
-                <td><?php echo $i++; ?></td>
-                <td><?php echo $tampil['id_user']; ?></td>
-                <td><?php echo $tampil['id_pemesan']; ?></td>
-                <td><?php echo $tampil['nama_pemesan']; ?> </td>
-                <td><?php echo $tampil['tanggal_pesan']; ?> </td>
-                <td><a href="detailpesan.php?id=<?php echo $tampil['id_pemesan']; ?>" class="btn btn-outline-warning" style="width: 100px;">Pay</a></td>
-                <td><?php echo $tampil['status']; ?></td>
-              </tr>
-            <?php } ?>
-          </tbody>
-        </table>
-        <!-- akhir tabel -->
-        <!-- script js tabel -->
-        <script>
-          $(document).ready(function() {
-            var table = $('#example').DataTable({
-              lengthChange: false,
-              buttons: ['copy', 'excel', 'pdf', 'print', 'colvis']
-            });
 
-            table.buttons().container()
-              .appendTo('#example_wrapper .col-md-6:eq(0)');
+      <table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>id user</th>
+            <th>id pemesan</th>
+            <th>nama pemesan</th>
+            <th>tanggal</th>
+            <th>Action</th>
+            <th>status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php $i = 1; ?>
+          <?php while ($tampil = mysqli_fetch_array($call)) { ?>
+            <tr>
+              <td><?php echo $i++; ?></td>
+              <td><?php echo $tampil['id_user']; ?></td>
+              <td><?php echo $tampil['id_pemesan']; ?></td>
+              <td><?php echo $tampil['nama_pemesan']; ?> </td>
+              <td><?php echo $tampil['tanggal_pesan']; ?> </td>
+              <td><a href="detailpesan.php?id=<?php echo $tampil['id_pemesan']; ?>" class="btn btn-outline-warning" style="width: 100px;">Pay</a></td>
+              <td><?php echo $tampil['status']; ?></td>
+            </tr>
+          <?php } ?>
+        </tbody>
+      </table>
+      <!-- akhir tabel -->
+      <!-- script js tabel -->
+      <script>
+        $(document).ready(function() {
+          var table = $('#example').DataTable({
+            lengthChange: false,
+            buttons: ['copy', 'excel', 'pdf', 'print', 'colvis']
           });
-        </script>
-      </div>
+
+          table.buttons().container()
+            .appendTo('#example_wrapper .col-md-6:eq(0)');
+        });
+      </script>
+
       <!-- end  -->
       <!-- akhir tabel -->
     </div>

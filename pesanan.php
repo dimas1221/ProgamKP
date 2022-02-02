@@ -210,7 +210,7 @@ if (isset($_SESSION['level'])) {
                         <td><?php echo $k++; ?> </td>
                         <td><input type="checkbox" name="kd_menu[]" value="<?php echo $data['kd_menu'] ?>"></td>
                         <td><input type="hidden" name="nama_menu[]" value="<?php echo $data['kd_menu'] ?>"><?php echo $data['nama_menu'] ?></td>
-                        <td><input style="width: 50px;" type="number" name="jumlah[]"></td>
+                        <td><input style="width: 50px;" type="number" name="jumlah[]" pattern="[0-9]+"></td>
                       </tr>
                     <?php
                     }

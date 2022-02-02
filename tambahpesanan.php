@@ -12,7 +12,7 @@
   $data_user = mysqli_fetch_array($calluser);
   //end
   //Query Menampilkan data
-  $query = "SELECT * FROM pemesan";
+  $query = "SELECT * FROM pemesan ORDER BY id_pemesan DESC";
   //Memanggil Data
   $call = mysqli_query($conn, $query);
 
@@ -70,6 +70,7 @@
     }
   }
   //end
+
   ?>
   <!doctype html>
   <html lang="en">
@@ -226,7 +227,7 @@
                     <td><input class=" form-control" type="text" name="nama_pemesan" placeholder="Nama pemesan" required></td>
                   </tr>
                   <tr>
-                    <td><input class="form-control" type="date" name="tanggal_pesan" placeholder="tanggal pesan"></td>
+                    <td><input class="form-control" type="datetime-local" name="tanggal_pesan" placeholder="tanggal pesan" required></td>
                   </tr>
                   <tr>
                     <td style="text-align: center;"><button class="btn btn-outline-success" name="tambah">Add</button></td>

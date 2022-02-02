@@ -178,7 +178,7 @@ $kodemenu = $huruf . sprintf("%03s", $urutan);
                     </div>
                     <div class="wrap-input100 validate-input m-b-23" data-validate="Username is reauired">
                         <span class="label-input100">Harga :</span>
-                        <input class="input100" type="text" name="simpan_harga" placeholder="harga" required>
+                        <input class="input100" type="text" name="simpan_harga" placeholder="harga" required pattern="[0-9]+">
                     </div>
                     <button class="btn btn-outline-success" style="width: 390px;" name="tambah_data">Add</button>
             </div>

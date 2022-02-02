@@ -12,7 +12,7 @@ $calluser = mysqli_query($conn, $sql_user);
 $data_user = mysqli_fetch_array($calluser);
 //end
 //Query Menampilkan data
-$query = "SELECT * FROM pemesan";
+$query = "SELECT * FROM pemesan ORDER BY id_pemesan DESC";
 $call = mysqli_query($conn, $query);
 ?>
 <html lang="en">

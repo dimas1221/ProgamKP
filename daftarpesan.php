@@ -189,7 +189,7 @@ function rupiah3($jumlah)
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <table id="example" class="table table-striped table-bordered" style="width: fit-content;">
+                        <table id="example" class="table table-striped table-bordered" style="width: 100%;">
                             <thead>
                                 <tr>
 
@@ -213,8 +213,8 @@ function rupiah3($jumlah)
 
                                     if ($mulai != null || $selesai != null) {
                                         $query = "SELECT nama_pemesan, nama_menu, harga, jumlah, total, tanggal_pesan 
-                                FROM pesanan INNER JOIN pemesan USING (id_pemesan) INNER JOIN menu USING (kd_menu) WHERE  (tanggal_pesan 
-                                BETWEEN '$mulai' AND '$selesai')";
+                                FROM pesanan INNER JOIN pemesan USING (id_pemesan) INNER JOIN menu USING (kd_menu) WHERE tanggal_pesan 
+                                BETWEEN '$mulai' AND DATE_ADD('$selesai', INTERVAL 1 DAY)";
                                         //Memanggil Data
                                         $call = mysqli_query($conn, $query);
                                     } else {
